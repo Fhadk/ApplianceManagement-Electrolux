@@ -28,5 +28,4 @@ public class ApplianceController {
         log.info("findApplianceOfUserById: ApplianceController");
         return applianceService.findApplianceOfUserById(userId);
     }
-
 }
