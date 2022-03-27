@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @Slf4j
 public class ApplianceService {
@@ -24,13 +27,9 @@ public class ApplianceService {
     }
 
     public ResponseTemplateVO findApplianceOfUserById(Long userId) {
-        ResponseTemplateVO responseTemplateVO =  new ResponseTemplateVO();
         User user =  restTemplate.getForObject("http://USER-SERVICE/users/" + userId, User.class);
-
-        responseTemplateVO.setUser(user);
-        responseTemplateVO.setAppliance(applianceRepository.findByUserId(user.getUserId()));
+        ResponseTemplateVO responseTemplateVO =  new ResponseTemplateVO(user,applianceRepository.findByUserId(user.getUserId()));
 
         return responseTemplateVO;
     }
-
 }
